@@ -14,8 +14,7 @@ export default function NewGoal({ onAddGoal }: NewGoalProps){
     function handleSubmit(e: FormEvent<HTMLFormElement>){
         e?.preventDefault();
 
-        new FormData(e?.currentTarget)
-   
+    new FormData(e?.currentTarget);
 
     // ref will always give us the current value 
         // ! - value will NEVER be null, if null app will crash 
@@ -23,24 +22,28 @@ export default function NewGoal({ onAddGoal }: NewGoalProps){
 
     const enteredSummary = summary.current!.value;
 
+    // reset form
+    e.currentTarget.reset();
+
     onAddGoal(enteredGoal, enteredSummary)
  }
 
 
-    return <form onSubmit={handleSubmit}>
-        <p>
-            <label htmlFor="goal">Your Goal</label>
-            <input type="text" id="goal" name="goal" ref={goal} />
-           
-        </p>
-        <p>
-            <label htmlFor="summary">Summary</label>
-            <input type="text" id="summary" ref={summary} />
-        </p>
-        <p>
-            <button>Add</button>
-        </p>
+    return (
+        <form onSubmit={handleSubmit}>
+            <p>
+                <label htmlFor="goal">Your Goal</label>
+                <input type="text" id="goal" name="goal" ref={goal} />
+            
+            </p>
+            <p>
+                <label htmlFor="summary">Summary</label>
+                <input type="text" id="summary" ref={summary} />
+            </p>
+            <p>
+                <button>Add</button>
+            </p>
 
-        
-    </form>
+        </form>
+    )
 }
